@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      "import.meta.env": env, 
+      "import.meta.env.VITE_GITHUB_TOKEN": JSON.stringify(env.VITE_GITHUB_TOKEN), 
     },
   };
 });
