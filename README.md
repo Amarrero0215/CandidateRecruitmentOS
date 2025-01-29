@@ -88,9 +88,9 @@ I welcome feedback and suggestions to improve this project. If you have any thou
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License** – feel free to modify and use it!
+## 📜 License  
+This project is proprietary and intended for feedback only.  
+Unauthorized use, modification, or distribution is prohibited.  
 
 ---
 
