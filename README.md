@@ -64,11 +64,11 @@ The app will start at **`http://localhost:5173`** (or another port assigned by V
 
 ---
 
-## 🖼 Screenshots (Optional)
+## 🖼 Screenshots 
 
 | **Candidate Search** | **Saved Candidates** |
 |-----------------|----------------|
-| ![Candidate Search Screenshot](./screenshots/candidate-search.png) | ![Saved Candidates Screenshot](./screenshots/saved-candidates.png) |
+| ![Candidate Search Screenshot](./assets/CandidateSearchDemo.png) | ![Saved Candidates Screenshot](./assets/SavedCandidatesDemo.png) |
 
 ---
 
