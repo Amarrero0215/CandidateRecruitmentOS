@@ -47,6 +47,14 @@ The app will start at **`http://localhost:5173`** (or another port assigned by V
 
 ---
 
+## 🚀 Live Demo
+
+The project is deployed on Render:
+
+🔗 [Live App](https://candidaterecruitmentos.onrender.com)
+
+---
+
 ## 🎮 Usage Instructions
 
 ### **1️⃣ Searching for Candidates**
