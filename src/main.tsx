@@ -11,7 +11,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -20,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: '/SavedCandidates',
         element: <SavedCandidates />,
+      },
+      {
+        path: '*',  // Catch-all for invalid routes
+        element: <ErrorPage />,
       },
     ],
   },

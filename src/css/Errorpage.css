@@ -1,0 +1,26 @@
+.error-page {
+    text-align: center;
+    margin-top: 120px; /* Pushes content down below the navbar */
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+  
+  .error-page h1 {
+    font-size: 36px;
+    color: red;
+  }
+  
+  .error-page p {
+    font-size: 18px;
+  }
+  
+  .error-page a {
+    text-decoration: none;
+    color: cyan;
+    font-weight: bold;
+  }
+  
+  .error-page a:hover {
+    text-decoration: underline;
+  }
+  
