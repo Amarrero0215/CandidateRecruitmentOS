@@ -11,8 +11,15 @@ const CandidateSearch = () => {
   // Function to load the next candidate from API
   const loadNextCandidate = async () => {
     try {
-      const candidates = await searchGithub();
-      console.log("Fetched Candidates:", candidates);
+      let candidates = await searchGithub();
+      console.log("Filtered Candidates:", candidates);
+
+      let attempts = 3; // Retry up to 3 times if needed
+      while (candidates.length === 0 && attempts > 0) {
+        console.warn("No valid candidates found. Retrying...");
+        candidates = await searchGithub();
+        attempts--;
+      }
 
       if (candidates.length > 0) {
         const selectedCandidate = candidates[Math.floor(Math.random() * candidates.length)];

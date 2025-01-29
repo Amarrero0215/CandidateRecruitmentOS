@@ -1,4 +1,12 @@
 /* Candidate Card Styling */
+.candidate-search {
+    margin-top: 80px; /* Increased margin to push down content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
 .candidate-card {
     width: 300px;
     margin: auto;
@@ -29,3 +37,95 @@
     background-color: #8a8484; /* Light gray background */
 }
 
+/* Saved Candidate Card Styling */
+.saved-candidates-container {
+    margin-top: 80px !important;
+    max-width: 90%;
+    height: 600px; /* Keeps the dashboard at a fixed height */
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(30, 30, 30, 0.95); /* Dark transparent background */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+/* Scrollable Dashboard */
+.saved-candidates-dashboard {
+    width: 100%;
+    overflow-y: auto; /* Enables scrolling inside the container */
+    max-height: 500px; /* Keeps the table inside the fixed container */
+}
+  
+/* Table Styling */
+.saved-candidates-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+  
+.saved-candidates-table th,
+.saved-candidates-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+  
+.saved-candidates-table th {
+    background: rgba(50, 50, 50, 0.9);
+    font-weight: bold;
+}
+  
+/* ✅ Alternating Row Colors */
+.saved-candidates-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+}
+  
+.saved-candidates-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transition: 0.2s ease-in-out;
+}
+
+/* Buttons */
+.accept-button, .remove-button {
+    padding: 6px 12px;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+  
+.accept-button {
+    background-color: green;
+    color: white;
+}
+  
+.accept-button:hover {
+    background-color: darkgreen;
+}
+  
+.remove-button {
+    background-color: red;
+    color: white;
+}
+  
+.remove-button:hover {
+    background-color: darkred;
+}
+  
+/* Style for empty row message */
+.empty-row {
+    text-align: center;
+    padding: 20px;
+}
+  
+/* Candidate Avatar Styling */
+.candidate-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+  

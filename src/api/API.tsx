@@ -2,12 +2,12 @@ import { Candidate } from "../interfaces/Candidate.interface";
 
 const searchGithub = async (): Promise<Candidate[]> => {
   try {
-    const start = Math.floor(Math.random() * 100000000) + 1;
+    const start = Math.floor(Math.random() * 1000000) + 1;
 
     console.log("Fetching users with token:", import.meta.env.VITE_GITHUB_TOKEN);
 
     const response = await fetch(
-      `https://api.github.com/users?since=${start}`,
+      `https://api.github.com/users?since=${start}&per_page=10`,
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
@@ -49,9 +49,12 @@ const searchGithub = async (): Promise<Candidate[]> => {
       })
     );
 
-    // Filter out null values (failed API calls)
-    const validUsers: Candidate[] = detailedUsers.filter(user => user !== null) as Candidate[];
-    console.log("Detailed Users Data:", validUsers);
+    // Filter out null values & who do not have both email and location (failed API calls)
+    const validUsers: Candidate[] = detailedUsers.filter(
+      (user) => user && user.email && user.location
+    ) as Candidate[];
+
+    console.log("Filtered Users Data (Only with Email & Location):", validUsers);
 
     return validUsers;
   } catch (err) {

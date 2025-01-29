@@ -3,7 +3,7 @@ import '../css/Nav.css';
 
 const Nav = () => {
   return (
-    <nav className="nav">
+    <nav className="navbar">  {/* Changed from "nav" to "navbar" */}
       <ul className="nav-list">
         <li className="nav-item">
           <Link to="/" className="nav-link">Candidate Search</Link>

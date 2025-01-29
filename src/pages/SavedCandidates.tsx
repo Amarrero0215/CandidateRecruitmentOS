@@ -4,7 +4,7 @@ import { Candidate } from "../interfaces/Candidate.interface";
 import '../css/Candidate.css';
 
 const SavedCandidates = () => {
-  const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]); 
+  const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
     const candidates: Candidate[] = JSON.parse(localStorage.getItem("candidates") || "[]");
@@ -19,24 +19,74 @@ const SavedCandidates = () => {
   };
 
   return (
-    <div>
-      <h1>Potential Candidates</h1>
-      {savedCandidates.length === 0 ? (
-        <p>No candidates saved yet.</p>
-      ) : (
-        <ul>
-          {savedCandidates.map((candidate) => (
-            <li key={candidate.login}>
-              <img src={candidate.avatar_url} alt={candidate.name} width="50" />
-              {candidate.name} ({candidate.login})
-              <button onClick={() => removeCandidate(candidate.login)}>Remove</button>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="saved-candidates-container">
+      <h1>Saved Candidates</h1>
+
+      {/*  Scrollable Dashboard Container */}
+      <div className="saved-candidates-dashboard">
+        <table className="saved-candidates-table">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Location</th>
+              <th>Company</th>
+              <th>Accept</th> {/*  Future Feature */}
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {savedCandidates.length === 0 ? (
+              <tr>
+                <td colSpan={8} className="empty-row">
+                  No candidates saved yet.
+                </td>
+              </tr>
+            ) : (
+              savedCandidates.map((candidate) => (
+                <tr key={candidate.login}>
+                  <td>
+                    <img
+                      src={candidate.avatar_url}
+                      alt={candidate.name}
+                      className="candidate-avatar"
+                    />
+                  </td>
+                  <td>{candidate.name}</td>
+                  <td>@{candidate.login}</td>
+                  <td>
+                    {candidate.email !== "N/A" ? (
+                      <a href={`mailto:${candidate.email}`}>{candidate.email}</a>
+                    ) : (
+                      "N/A"
+                    )}
+                  </td>
+                  <td>{candidate.location}</td>
+                  <td>{candidate.company}</td>
+                  
+                  {/*  Placeholder Accept Button (Future Email Integration) */}
+                  <td>
+                    <button className="accept-button" onClick={() => alert(`Accepted ${candidate.name}!`)}>
+                      ✅
+                    </button>
+                  </td>
+
+                  {/* ✅ Remove Candidate Button */}
+                  <td>
+                    <button className="remove-button" onClick={() => removeCandidate(candidate.login)}>
+                      ❌
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 export default SavedCandidates;
-
