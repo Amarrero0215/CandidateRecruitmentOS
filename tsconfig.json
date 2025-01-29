@@ -26,6 +26,5 @@
     /* Force Case Sensitivity for Cross-OS Development */
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }

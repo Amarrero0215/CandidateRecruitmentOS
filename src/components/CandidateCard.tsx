@@ -8,14 +8,27 @@ interface CandidateCardProps {
 }
 
 const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onAccept, onReject }) => {
+  // Destructure candidate object for cleaner code
+  const { name, login, avatar_url, location, email, company, bio } = candidate;
+
+  // Correctly format name display
+  const displayName = name !== login ? `${name} (${login})` : login; 
+
   return (
     <div className="candidate-card">
-      <img src={candidate.avatar_url} alt={`${candidate.name}'s avatar`} className="avatar" />
-      <h2>{candidate.name} <span>({candidate.login})</span></h2>
-      <p>Location: {candidate.location || "N/A"}</p>
-      <p>Email: <a href={`mailto:${candidate.email}`}>{candidate.email || "N/A"}</a></p>
-      <p>Company: {candidate.company || "N/A"}</p>
-      <p>Bio: {candidate.bio || "N/A"}</p>
+      {/* Avatar */}
+      <img src={avatar_url} alt={`${displayName}'s avatar`} className="avatar" />
+
+      {/* Display Name */}
+      <h2>{displayName}</h2>
+
+      {/* Candidate Info */}
+      <p><strong>Location:</strong> {location || "N/A"}</p>
+      <p><strong>Email:</strong> {email ? <a href={`mailto:${email}`}>{email}</a> : "N/A"}</p>
+      <p><strong>Company:</strong> {company || "N/A"}</p>
+      <p><strong>Bio:</strong> {bio || "N/A"}</p>
+
+      {/* Action Buttons */}
       <div className="buttons">
         <button className="reject" onClick={onReject}>-</button>
         <button className="accept" onClick={onAccept}>+</button>

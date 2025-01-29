@@ -1,8 +1,10 @@
-const searchGithub = async () => {
+import { Candidate } from "../interfaces/Candidate.interface";
+
+const searchGithub = async (): Promise<Candidate[]> => {
   try {
     const start = Math.floor(Math.random() * 100000000) + 1;
-    
-    console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN); // Check if token is loaded
+
+    console.log("Fetching users with token:", import.meta.env.VITE_GITHUB_TOKEN);
 
     const response = await fetch(
       `https://api.github.com/users?since=${start}`,
@@ -13,42 +15,49 @@ const searchGithub = async () => {
       }
     );
 
-    console.log("Response Status:", response.status); // Check API response status
-    const data = await response.json();
-    
     if (!response.ok) {
-      throw new Error("Invalid API response, check the network tab");
+      throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
     }
 
-    console.log("Fetched Users Data:", data); // Log fetched users
-    return data;
+    const users: Candidate[] = await response.json();
+    console.log("Basic Users Data:", users); // Log basic users data
+
+    if (!users || users.length === 0) {
+      console.error("No users found.");
+      return [];
+    }
+
+    // Fetch detailed user info with proper type annotations
+    const detailedUsers = await Promise.all(
+      users.map(async (user: Candidate) => {
+        const userResponse = await fetch(
+          `https://api.github.com/users/${user.login}`,
+          {
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+            },
+          }
+        );
+
+        if (!userResponse.ok) {
+          console.warn(`Failed to fetch details for ${user.login}: ${userResponse.status}`);
+          return null; // Return null to filter out failed requests
+        }
+
+        const detailedUser: Candidate = await userResponse.json();
+        return detailedUser;
+      })
+    );
+
+    // Filter out null values (failed API calls)
+    const validUsers: Candidate[] = detailedUsers.filter(user => user !== null) as Candidate[];
+    console.log("Detailed Users Data:", validUsers);
+
+    return validUsers;
   } catch (err) {
-    console.error("An error occurred:", err); // Log errors
+    console.error("An error occurred in searchGithub:", err);
     return [];
   }
 };
 
-const searchGithubUser = async (username: string) => {
-  try {
-    const response = await fetch(`https://api.github.com/users/${username}`, {
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-      },
-    });
-
-    console.log("Response Status:", response.status); // Check API response status
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error("Invalid API response, check the network tab");
-    }
-
-    console.log(`User Data for ${username}:`, data); // Log fetched user data
-    return data;
-  } catch (err) {
-    console.error("An error occurred:", err); // Log errors
-    return {};
-  }
-};
-
-export { searchGithub, searchGithubUser };
+export { searchGithub };
