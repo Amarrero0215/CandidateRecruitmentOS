@@ -11,5 +11,19 @@ export default defineConfig(({ mode }) => {
     define: {
       "import.meta.env.VITE_GITHUB_TOKEN": JSON.stringify(env.VITE_GITHUB_TOKEN), // Ensure env variables are accessible
     },
+
+    server: {
+      host: "0.0.0.0", // Ensures Vite binds to all network interfaces
+      port: 5173, // Render assigns a port, but this is a fallback
+      strictPort: true,
+      allowedHosts: ["candidaterecruitmentos.onrender.com"], // Allow Render domain
+    },
+
+    preview: {
+      host: "0.0.0.0",
+      port: 5173,
+      strictPort: true,
+      allowedHosts: ["candidaterecruitmentos.onrender.com"], // Allow Render domain for preview mode
+    },
   };
 });
