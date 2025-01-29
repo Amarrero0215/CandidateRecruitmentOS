@@ -6,10 +6,10 @@ const Nav = () => {
     <nav className="navbar">  {/* Changed from "nav" to "navbar" */}
       <ul className="nav-list">
         <li className="nav-item">
-          <Link to="/" className="nav-link">Candidate Search</Link>
+          <Link to="/" className="nav-link">Home</Link>
         </li>
         <li className="nav-item">
-          <Link to="/SavedCandidates" className="nav-link">Saved Candidates</Link>
+          <Link to="/SavedCandidates" className="nav-link">Potential Candidates</Link>
         </li>
       </ul>
     </nav>
